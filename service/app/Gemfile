@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+ruby '2.6.0'
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -7,7 +11,8 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.6'
+gem 'rails', '~> 5.2.2'
+
 gem 'bcrypt', '3.1.12'
 gem 'faker', '1.7.3'
 gem 'will_paginate', '3.1.6'
@@ -53,6 +58,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'minitest-reporters'
   gem 'rails-controller-testing'
+  gem 'rubocop', require: false
 end
 
 group :development do
