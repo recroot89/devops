@@ -13,4 +13,4 @@ app-bash:
 	docker-compose run --user=$(USER) app bash
 
 app-db-prepare:
-	docker-compose run --user=$(USER) app bin/rails db:migrate db:fixtures:load
+	docker-compose run --user=$(USER) app bin/rails db:create db:migrate db:fixtures:load

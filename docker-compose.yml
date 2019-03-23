@@ -12,6 +12,12 @@ services:
       - "~/.bash_history:/root/.bash_history"
       - "./services/app:/usr/src/app:cached"
       - "/tmp:/tmp:delegated"
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_USERNAME=postgres
+    depends_on:
+      - db
+
   nginx:
     build:
       context: services/nginx
@@ -20,3 +26,11 @@ services:
       - "8080:8080"
     depends_on:
       - app
+
+  db:
+    image: postgres:11.1
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
