@@ -1,2 +1,6 @@
+vendor
 tmp
 log
+node_modules
+public/assets
+public/packs

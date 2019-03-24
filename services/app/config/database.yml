@@ -1,22 +1,21 @@
 default: &default
   adapter: postgresql
-  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
-  username: <%= ENV['DATABASE_USERNAME'] || nil %>
+  host: <%= ENV['DB_HOSTNAME'] %>
+  username: <%= ENV['DB_USERNAME'] %>
   encoding: unicode
 
 development:
   <<: *default
-  database: <%= ENV['DATABASE_NAME'] || 'devops_development' %>
+  database: <%= ENV['DB_NAME'] %>
 
 test:
   <<: *default
-  database: devops_test
-  port: <% (ENV['CI_NAME'] == 'codeship') ? 5433 : 5432 %>
+  database: <%= ENV['DB_NAME'] %>
 
 production:
   <<: *default
-  database: <%= ENV['DATABASE_NAME'] %>
-  username: <%= ENV['DATABASE_USERNAME'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
-  host: <%= ENV['DATABASE_HOST'] %>
-  port: <%= ENV['DATABASE_PORT'] %>
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOSTNAME'] %>
+  port: <%= ENV['DB_PORT'] %>

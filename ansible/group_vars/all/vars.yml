@@ -1,0 +1,2 @@
+devops_app_port: 3000
+devops_app_log_to_stdout: true
