@@ -1,16 +1,14 @@
----
 version: "2"
 
 services:
   db:
     image: postgres:11
     environment:
-      POSTGRES_USER: devops-user
+      POSTGRES_USER: postgres
   sut:
     build:
       context: .
       dockerfile: Dockerfile.production
-    command: bin/rails test
-    env_file: "../../.env"
+    command: bash -c "bin/rails test"
     depends_on:
       - db

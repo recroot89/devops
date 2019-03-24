@@ -1,5 +1,4 @@
-devops_vault_db_name: devops_development
+devops_vault_db_name: ""
 devops_vault_db_username: postgres
 devops_vault_db_password: ""
 devops_vault_db_hostname: db
-devops_do_token: lala

@@ -5,3 +5,4 @@ secrets.auto.tfvars
 *.tfstate
 *.tfstate.*
 node_modules
+files

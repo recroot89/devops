@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- hosts: localhost
+  gather_facts: false
   tasks:
     - template:
         src: environment.j2
