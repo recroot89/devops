@@ -1,6 +1,8 @@
 ---
 devops_rails_env: production
 devops_run_user: ubuntu
-devops_run_user_home: /home/ubuntu
+devops_run_user_home: ~/
 devops_env_file: "{{ devops_run_user_home }}/.env"
 devops_node_env: production
+devops_image_name: "devops/app"
+devops_nginx_image_name: "devops-nginx"

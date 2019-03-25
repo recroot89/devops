@@ -9,3 +9,6 @@ ansible-vaults-edit:
 
 development-setup-env:
 	ansible-playbook ansible/development.yml -i ansible/development -vv
+
+terraform-vars-generate:
+	ansible-playbook ansible/terraform.yml -i ansible/production -vv

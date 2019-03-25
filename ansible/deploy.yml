@@ -23,17 +23,19 @@
     - template:
         src: environment.j2
         dest: "{{ devops_env_file }}"
-      tags: env
+      tags: [webserver, env, app, nginx]
 
     - name: download app image
       docker_image:
         name: "{{ devops_image_name }}:{{ devops_image_tag }}"
         force: true
+      tags: app
 
     - name: download nginx image
       docker_image:
         name: "{{ devops_nginx_image_name }}:{{ devops_image_tag }}"
         force: true
+      tags: nginx
 
     - name: run migrations
       docker_container:
@@ -50,7 +52,7 @@
           - "/tmp:/tmp"
           - "/var/tmp:/var/tmp"
       run_once: true
-      tags: [webservers]
+      tags: [webservers, app]
 
     - name: start nginx
       docker_container:
@@ -68,7 +70,7 @@
           - "80:8080"
         networks:
           - name: "{{ devops_docker_network }}"
-      tags: [webservers]
+      tags: [webservers, nginx]
 
     - name: start application
       docker_container:
@@ -84,7 +86,7 @@
         restart_policy: always
         env_file: "{{ devops_env_file }}"
         env:
-          RAILS_ENV: prod
+          RAILS_ENV: production
           NODE_ENV: production
         # published_ports:
         #   - "80:{{ devops_port }}"
@@ -95,12 +97,13 @@
           - "/var/tmp:/var/tmp"
         networks:
           - name: "{{ devops_docker_network }}"
-      tags: [webservers]
+      tags: [webservers, app, env]
 
     - lineinfile:
-        regexp: "devops_VERSION"
-        line: "devops_VERSION={{ devops_image_tag }}"
+        regexp: "DEVOPS_VERSION"
+        line: "DEVOPS_VERSION={{ devops_image_tag }}"
         dest: /etc/environment
         backup: true
         state: present
       become: true
+      tags: [webservers, app]

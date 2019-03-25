@@ -1,8 +1,11 @@
 tmp
 .env
+*.retry
+
+node_modules
+
 .terraform
 secrets.auto.tfvars
 *.tfstate
 *.tfstate.*
-node_modules
 files

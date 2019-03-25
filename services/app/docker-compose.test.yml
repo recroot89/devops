@@ -1,14 +1,16 @@
 version: "2"
 
 services:
-  db:
-    image: postgres:11
-    environment:
-      POSTGRES_USER: postgres
   sut:
     build:
       context: .
       dockerfile: Dockerfile.production
-    command: bash -c "bin/rails test"
+    command: bash -c "bin/rails db:migrate db:fixtures:load && bin/rails test"
+    environment:
+      - RAILS_ENV=test
     depends_on:
       - db
+  db:
+    image: postgres:11
+    environment:
+      POSTGRES_USER: postgres
